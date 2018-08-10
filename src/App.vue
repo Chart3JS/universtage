@@ -1,5 +1,5 @@
 <template>
-  <v-app id="crossword">
+  <v-app id="universtage">
     <v-navigation-drawer
       v-model="drawer"
       fixed
@@ -26,7 +26,7 @@
     </v-navigation-drawer>
     <v-toolbar color="indigo" dark fixed app>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>Crossword</v-toolbar-title>
+      <v-toolbar-title>Universtage</v-toolbar-title>
     </v-toolbar>
     <v-content>
       <v-container fluid fill-height pt-2>
@@ -34,7 +34,7 @@
       </v-container>
     </v-content>
     <v-footer class="footer" color="indigo" app>
-      <span class="white--text">&copy; Crossword</span>
+      <span class="white--text">&copy; Universtage</span>
     </v-footer>
   </v-app>
 </template>

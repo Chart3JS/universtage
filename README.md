@@ -41,6 +41,3 @@ npm run android
 
 # build for production and serve the app on an android device (will serve on a virtual device or physical device - prefers virtual)
 npm run android-vm
-```
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
