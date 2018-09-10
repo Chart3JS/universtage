@@ -10,8 +10,11 @@
     <feature name="CDVOrientation">
         <param name="android-package" value="cordova.plugins.screenorientation.CDVOrientation" />
     </feature>
-    <name>Crossword</name>
-    <description>Lightapp Mobile App</description>
+    <feature name="NativeStorage">
+        <param name="android-package" value="NativeStorage" />
+    </feature>
+    <name>Universtage</name>
+    <description>Universtage Mobile App</description>
     <author email="jprjdev@gmail.com" href="alisa-music.com">
         Alexander Plotkin
     </author>

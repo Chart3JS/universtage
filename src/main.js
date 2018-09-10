@@ -9,13 +9,13 @@ import router from '@/router'
 import store from '@/store'
 import i18n from '@/i18n'
 import LRU from 'lru-cache'
-// import CustomDirective from '@/CustomDirective'
-// import Konva from 'vue-konva'
+// import MobileDetect from 'mobile-detect'
 
 const themeCache = LRU({
   max: 10,
   maxAge: 1000 * 60 * 60 // 1 hour
 })
+
 Vue.directive('demo', {
   bind: function (el, binding, vnode) {
     var s = JSON.stringify
@@ -29,7 +29,6 @@ Vue.directive('demo', {
   }
 })
 Vue.use(_)
-// Vue.use(Konva)
 Vue.use(Vuetify, {
   lang: {
     t: (key, ...params) => i18n.t(key, params)

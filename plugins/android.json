@@ -15,6 +15,9 @@
     },
     "cordova-plugin-screen-orientation": {
       "PACKAGE_NAME": "com.lightapp.edge"
+    },
+    "cordova-plugin-nativestorage": {
+      "PACKAGE_NAME": "com.lightapp.edge"
     }
   },
   "dependent_plugins": {

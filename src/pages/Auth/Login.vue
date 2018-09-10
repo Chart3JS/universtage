@@ -7,14 +7,14 @@
             v-model="userLogin.user_name"
             :counter="40"
             :rules="userNameRules"
-            :label="$t('login.user_name')"
+            :label="$t('auth.user_name')"
             required
           ></v-text-field>
           <v-text-field
             type="password"
             v-model="userLogin.user_password"
             :rules="passwordRules"
-            :label="$t('login.user_password')"
+            :label="$t('auth.user_password')"
             required
           ></v-text-field>
           <!-- v-progress-linear v-show="loginInProgress" :indeterminate="true"></v-progress-linear-->
@@ -23,19 +23,6 @@
             persistent
             width="300"
           >
-            <v-card
-              color="primary"
-              dark
-            >
-              <v-card-text>
-                Please stand by
-                <v-progress-linear
-                  indeterminate
-                  color="white"
-                  class="mb-0"
-                ></v-progress-linear>
-              </v-card-text>
-            </v-card>
           </v-dialog>
           <v-btn
             :disabled="!valid"
@@ -43,10 +30,27 @@
             color="info"
             primary
           >
-            {{ $t('login.login_button_text') }}
+            {{ $t('auth.login_button_text') }}
           </v-btn>
-          <v-btn @click="clear">clear</v-btn>
+          <v-btn @click="clear">{{ $t('global.clear_title') }}</v-btn>
         </v-form>
+        <v-divider></v-divider>
+        <v-card-text style="text-align: center">
+          {{ $t('global.or_word') }}
+          <v-divider></v-divider>
+          <v-btn
+            @click="goToRegistration"
+            color="primary"
+            primary
+          >
+            {{ $t('auth.register_title') }}
+          </v-btn>
+        </v-card-text>
+        <v-progress-circular
+          v-show="loginInProgress"
+          indeterminate
+          color="yellow"
+        ></v-progress-circular>
       </v-layout>
     </v-slide-y-transition>
   </v-container>
@@ -67,11 +71,11 @@ export default {
       currentUser: this.$store.state.AppStore.currentUser,
       valid: false,
       passwordRules: [
-        v => !!v || this.$t('login.user_password_required')
+        v => !!v || this.$t('auth.user_password_required')
       ],
       userNameRules: [
-        v => !!v || this.$t('login.user_name_required'),
-        v => /.+@.+/.test(v) || this.$t('login.user_name_must_be_valid')
+        v => !!v || this.$t('auth.user_name_required'),
+        v => /.+@.+/.test(v) || this.$t('auth.user_name_must_be_valid')
       ]
     }
   },
@@ -93,6 +97,9 @@ export default {
           }
         })
       }
+    },
+    goToRegistration () {
+      this.$router.replace('/register')
     },
     clear () {
       this.userLogin.user_name = null

@@ -1,6 +1,7 @@
 <template>
   <v-app id="universtage">
     <v-navigation-drawer
+      v-show="isLoggedIn"
       v-model="drawer"
       fixed
       app
@@ -25,7 +26,7 @@
       </v-list>
     </v-navigation-drawer>
     <v-toolbar color="indigo" dark fixed app>
-      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+      <v-toolbar-side-icon v-show="isLoggedIn" @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>Universtage</v-toolbar-title>
     </v-toolbar>
     <v-content>
@@ -34,7 +35,7 @@
       </v-container>
     </v-content>
     <v-footer class="footer" color="indigo" app>
-      <span class="white--text">&copy; Universtage</span>
+      <span class="white--text">&copy;{{ $t('global.copyright_title') }}</span>
     </v-footer>
   </v-app>
 </template>
@@ -47,10 +48,11 @@
       source: String
     },
     data () {
+      console.log(this.$store.state)
       return {
         cordova: Vue.cordova,
         clipped: false,
-        drawer: null,
+        drawer: false,
         items: [
           {
             icon: 'bubble_chart',
@@ -60,7 +62,7 @@
         miniVariant: false,
         right: true,
         rightDrawer: false,
-        title: 'Crossword',
+        title: 'Universtage',
         isLoggedIn: this.$store.state.AppStore.currentUser,
         selectedLang: this.$i18n.locale
       }
@@ -71,6 +73,24 @@
         self.onDeviceReady()
         screen.orientation.lock('landscape')
       })
+      const messageChannel = new MessageChannel()
+      messageChannel.port1.addEventListener('message', (event) => {
+        console.log(event.data)
+      })
+      // worker.postMessage({message: 1}, [messageChannel.port2])
+      // if (window.Notification && Notification.permission !== 'denied') {
+      //   Notification.requestPermission((status) => {
+      //     // status is "granted", if accepted by user
+      //     var n = new Notification('Title', {
+      //       body: 'I am the body text!',
+      //       icon: '/static/img/favicon.png' // optional
+      //     })
+      //     console.log(n)
+      //   })
+      // }
+    },
+    mounted () {
+      this.$store.dispatch('AppStore/init')
     },
     methods: {
       onDeviceReady: function () {
@@ -79,8 +99,9 @@
         this.cordova.on('resume', this.onResume, false)
         if (this.cordova.device.platform === 'Android') {
           document.addEventListener('backbutton', this.onBackKeyDown, false)
-          alert(window.screen.orientation)
+          // alert(window.screen.orientation)
         }
+        // alert(MessageChannel)
       },
       onPause () {
         // Handle the pause lifecycle event.
@@ -114,5 +135,6 @@
     margin-bottom: env(safe-area-inset-bottom);
     padding: 0 0 0 8px;
     z-index: 10;
+    font-size: .86em;
   }
 </style>
